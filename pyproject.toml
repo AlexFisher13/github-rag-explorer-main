@@ -1,0 +1,85 @@
+[tool.poetry]
+name = "github-rag-explorer"
+version = "0.1.0"
+packages = [{include = "github_rag_explorer"}]
+license = "MIT"
+description = ""
+authors = ["npavlin <np@letsnova.ru>"]
+readme = "README.md"
+keywords = ["rag", "github", "llm", "ai", "llama-index"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[tool.poetry.scripts]
+github-rag = "github_rag_explorer.cli:main"
+github-rag-explorer = "github_rag_explorer.ui.run:main"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+llama-index = "^0.12.30"
+streamlit = "^1.44.1"
+pygments = "^2.19.1"
+llama-index-readers-github = "^0.6.0"
+llama-index-llms-anthropic = "^0.6.10"
+llama-index-llms-ollama = "^0.5.4"
+tree-sitter-language-pack = "^0.7.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.5"
+
+[tool.ruff]
+# Включаем нужные правила
+lint.select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+
+line-length = 80
+
+# Поддерживаемая версия Python
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "single"
+inline-quotes = "single"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"web_ui.py" = ["E501"]
+"pages.py" = ["E501", "C901"]
+"cli.py" = ["E501"]
+"components.py" = ["E501"]
+"llm.py" = ["E501"]
+"query.py" = ["E501"]
+"processor.py" = ["E501"]
+"loader.py" = ["E501"]
+"constants.py" = ["E501"]
+"github_rag.py" = ["E501"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
