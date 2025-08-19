@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>GitHub RAG Explorer</title>
+</head>
+<body>
+<h1>Repository Search</h1>
+<form th:action="@{/search}" th:object="${request}" method="post">
+    <input type="text" th:field="*{query}" placeholder="Ask a question" />
+    <button type="submit">Search</button>
+</form>
+<div th:if="${result}">
+    <h2>Answer</h2>
+    <p th:text="${result.answer}"></p>
+    <h3>Documents</h3>
+    <ul>
+        <li th:each="doc : ${result.documents}">
+            <strong th:text="${doc.path}"></strong>
+            <pre th:text="${doc.content}"></pre>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
